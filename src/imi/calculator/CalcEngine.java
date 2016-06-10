@@ -31,7 +31,40 @@ public class CalcEngine {
 
 		return this.lastSetResult.toString();
 	}
-
+	
+	// returns the amount of items in a set as a set
+	public String getNofSet(String input) {
+		input = input.replace("{", "");
+		input = input.replace("}", "");
+		input = input.replace(" ", "");
+		String data[] = input.split(",");
+		Set set= new Set();
+		for (String value : data) {
+			set.add(Integer.parseInt(value));
+		}
+		
+		int amount = 0;
+		
+		
+		String s= set.toString();
+		s = s.replace("{", "");
+		s = s.replace("}", "");
+		s = s.replace(" ", "");
+		s = s.replace(",","");
+		 
+		 amount = s.length();
+		 System.out.println(s);
+		
+		 
+		 set.clear();
+		 
+		 set.add(amount);
+		 
+		 return set.toString();
+		
+				
+	}
+	
 	// add two sets, returns the result set as string
 	public String unionSets(String input) {
 

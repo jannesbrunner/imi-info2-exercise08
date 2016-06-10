@@ -224,5 +224,14 @@ public class CalcTest {
 		
 	}
 	
+	@Test
+	public void testAmountOfItemsInSet() {
+		
+		String setToTest = "{ 1, 2, 3, 4, 5}";
+		String result = engine.getNofSet(setToTest);
+		
+		assertEquals("N of { 1, 2, 3, 4, 5} is 5", "{ 5 }", result);
+	}
+	
 
 }
