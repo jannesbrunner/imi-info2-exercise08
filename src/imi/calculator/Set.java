@@ -29,11 +29,11 @@ public class Set {
 		if(!contains(toAdd)){
 			listOfIntegers.add(toAdd);
 		}
+		Collections.sort(listOfIntegers);
 	}
 	
 	public void remove(int toRemove){
 		if(contains(toRemove)){
-			Collections.sort(listOfIntegers);
 			int index = 0; 
 			for (int i = 0; i < listOfIntegers.size(); i++)
 				if(listOfIntegers.indexOf(i) == toRemove){
@@ -41,6 +41,7 @@ public class Set {
 					System.out.println("HEJ!");
 				}
 			listOfIntegers.remove(index);
+			Collections.sort(listOfIntegers);
 		}
 	}
 	
@@ -49,7 +50,7 @@ public class Set {
 	}
 	
 	public String toString(){
-		
+	
 		String result = "{ ";
 		for(int current : listOfIntegers){
 			result += current + ", ";
