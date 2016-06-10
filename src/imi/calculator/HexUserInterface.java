@@ -93,7 +93,7 @@ public class HexUserInterface implements ActionListener {
 
 		addButton(buttonPanel, "?");
 
-		buttonPanel.add(new JLabel(" "));
+		addButton(buttonPanel, "n");
 		addButton(buttonPanel, "0");
 
 		addButton(buttonPanel, "+/-");
@@ -127,18 +127,18 @@ public class HexUserInterface implements ActionListener {
 		hexComponents[5] = allComponents[29];
 		hexComponents[6] = allComponents[20];
 
-		notSetComponents = new Component[10];
+		notSetComponents = new Component[9];
 
 		notSetComponents[0] = allComponents[3];
 		notSetComponents[1] = allComponents[5];
 		notSetComponents[2] = allComponents[9];
 		notSetComponents[3] = allComponents[11];
 		notSetComponents[4] = allComponents[16];
-		notSetComponents[5] = allComponents[18];
-		notSetComponents[6] = allComponents[20];
-		notSetComponents[7] = allComponents[4];
-		notSetComponents[8] = allComponents[15];
-		notSetComponents[9] = allComponents[21];
+		notSetComponents[5] = allComponents[20];
+		notSetComponents[6] = allComponents[4];
+		notSetComponents[7] = allComponents[15];
+		notSetComponents[8] = allComponents[21];
+		
 
 		numbers = new Component[10];
 
@@ -160,13 +160,14 @@ public class HexUserInterface implements ActionListener {
 		operators[2] = allComponents[16];
 		operators[3] = allComponents[22];
 
-		setOperators = new Component[5];
+		setOperators = new Component[6];
 
 		setOperators[0] = allComponents[32];
 		setOperators[1] = allComponents[33];
 		setOperators[2] = allComponents[34];
 		setOperators[3] = allComponents[35];
 		setOperators[4] = allComponents[31];
+		setOperators[5] = allComponents[18];
 
 		for (Component tempComp : hexComponents) {
 			tempComp.setEnabled(false);
@@ -343,6 +344,11 @@ public class HexUserInterface implements ActionListener {
 		case "Set":
 
 			switchSetMode();
+			break;
+			
+		case "n":
+
+			displayValue = calc.getNofSet(displayValue);
 			break;
 
 		default:
