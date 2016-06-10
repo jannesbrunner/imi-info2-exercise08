@@ -38,7 +38,7 @@ public class CalcEngine {
 		input = input.replace("{", "");
 		input = input.replace("}", "");
 
-		String sets[] = input.split("\\+");
+		String sets[] = input.split("\\∪");
 		String ls = sets[0];
 		String rs = sets[1];
 
