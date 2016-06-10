@@ -6,13 +6,15 @@ import java.util.*; // Gegen eigene Set implementation austauschen?
 public class CalcEngine {
 
 	private Postfix postfix; // For Internal RPN Calculation
-	private TreeSet<Integer> lastSetResult;
+	// private TreeSet<Integer> lastSetResult;
+	private Set lastSetResult;
 	private String lastDP; // Holds the last calculatet Value
 
 	public CalcEngine() {
 		// This will do the magic
 		this.postfix = new Postfix();
-		this.lastSetResult = new TreeSet<Integer>();
+		// this.lastSetResult = new TreeSet<Integer>();
+		this.lastSetResult = new Set();
 		this.lastDP = "0";
 	}
 
@@ -48,7 +50,7 @@ public class CalcEngine {
 		String lhs[] = ls.split(",");
 		String rhs[] = rs.split(",");
 
-		TreeSet<Integer> result = new TreeSet<Integer>();
+		Set result = new Set();
 		for (String value : lhs) {
 			result.add(Integer.parseInt(value));
 		}
@@ -78,7 +80,7 @@ public class CalcEngine {
 		String lhs[] = ls.split(",");
 		String rhs[] = rs.split(",");
 
-		TreeSet<Integer> result = new TreeSet<Integer>();
+		Set result = new Set();
 		for (String value : lhs) {
 			result.add(Integer.parseInt(value));
 		}
@@ -113,9 +115,9 @@ public class CalcEngine {
 		String lhs[] = ls.split(",");
 		String rhs[] = rs.split(",");
 
-		TreeSet<Integer> result = new TreeSet<Integer>();
-		TreeSet<Integer> lhsSet = new TreeSet<Integer>();
-		TreeSet<Integer> rhsSet = new TreeSet<Integer>();
+		Set result = new Set();
+		Set lhsSet = new Set();
+		Set rhsSet = new Set();
 		
 		for (String value : lhs) {
 			lhsSet.add(Integer.parseInt(value));

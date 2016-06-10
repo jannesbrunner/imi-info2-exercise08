@@ -197,7 +197,7 @@ public class CalcTest {
 		
 		String setsToUnion = "{ 5, 3, 7 } + { 5, 3, 8, 9, }";
 		String result = engine.unionSets(setsToUnion);
-		assertEquals("{ 5, 3, 7 } + { 5, 3, 8, 9, } = { 3, 5, 7, 8, 9 }", "[3, 5, 7, 8, 9]", result);
+		assertEquals("{ 5, 3, 7 } + { 5, 3, 8, 9, } = { 5, 3, 7, 8, 9 }", "{ 5, 3, 7, 8, 9 }", result);
 			
 		
 	}
@@ -207,8 +207,8 @@ public class CalcTest {
 		
 		String setsToSubstract = "{ 5, 3, 7 } - { 5, 3, 8, 9, }";
 		String result = engine.subtractSets(setsToSubstract);
-		System.out.println(result);
-		assertEquals("{ 5, 3, 7 } - { 5, 3, 8, 9, } = { 7 }", "[7]", result);
+		
+		assertEquals("{ 5, 3, 7 } - { 5, 3, 8, 9, } = { 7 }", "{ 7 }", result);
 			
 		
 	}
@@ -218,8 +218,8 @@ public class CalcTest {
 		
 		String setsToSubstract = "{ 5, 3, 7 } ∩ { 5, 3, 8, 9, }";
 		String result = engine.intersectionSets(setsToSubstract);
-		System.out.println(result);
-		assertEquals("{ 5, 3, 7 } ∩ { 5, 3, 8, 9, } = { 3, 5 }", "[3, 5]", result);
+		
+		assertEquals("{ 5, 3, 7 } ∩ { 5, 3, 8, 9, } = { 3, 5 }", "{ 5, 3 }", result);
 			
 		
 	}
