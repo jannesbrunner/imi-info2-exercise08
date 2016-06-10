@@ -1,6 +1,7 @@
 package imi.calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Set {
 
@@ -32,6 +33,7 @@ public class Set {
 	
 	public void remove(int toRemove){
 		if(contains(toRemove)){
+			Collections.sort(listOfIntegers);
 			int index = 0; 
 			for (int i = 0; i < listOfIntegers.size(); i++)
 				if(listOfIntegers.indexOf(i) == toRemove){
@@ -62,6 +64,9 @@ public class Set {
 	public static void main(String[] args) {
 		Set mySet = new Set();
 		mySet.add(12);
+		mySet.add(120000);
+		mySet.add(1233);
+		mySet.add(22);
 		System.out.println("First add of 12 " + mySet.toString());
 		mySet.add(7432); 
 		System.out.println("After the add of 7432 " + mySet.toString());
