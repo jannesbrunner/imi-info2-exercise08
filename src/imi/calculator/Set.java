@@ -41,7 +41,7 @@ public class Set {
 					System.out.println("HEJ!");
 				}
 			listOfIntegers.remove(index);
-			Collections.sort(listOfIntegers);
+			
 		}
 	}
 	
