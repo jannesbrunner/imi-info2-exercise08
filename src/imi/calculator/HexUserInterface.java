@@ -25,9 +25,15 @@ public class HexUserInterface implements ActionListener {
 	private JLabel status;
 	private Component[] hexComponents;
 	private Component[] operators;
+	private Component[] setOperators;
+	private Component[] numbers;
+	private Component[] notSetComponents;
 	private boolean isHex;
 	private JToggleButton toggleButton;
+	private JToggleButton setToggleButton;
 	private String displayValue;
+	private boolean isSetMode;
+	private String setOperation;
 
 	private boolean operatorPressed;
 
@@ -44,6 +50,8 @@ public class HexUserInterface implements ActionListener {
 		operatorPressed = false;
 		makeFrame();
 		frame.setVisible(true);
+		isSetMode = false;
+		setOperation = "";
 
 	}
 
@@ -88,7 +96,7 @@ public class HexUserInterface implements ActionListener {
 		buttonPanel.add(new JLabel(" "));
 		addButton(buttonPanel, "0");
 
-		buttonPanel.add(new JLabel(" "));
+		addButton(buttonPanel, "+/-");
 		addButton(buttonPanel, "^");
 
 		addButton(buttonPanel, "-");
@@ -100,10 +108,13 @@ public class HexUserInterface implements ActionListener {
 		addButton(buttonPanel, "D");
 		addButton(buttonPanel, "E");
 		addButton(buttonPanel, "F");
-		
-		buttonPanel.add(new JLabel(" "));
-		addButton(buttonPanel, "+/-");
-		addButton(buttonPanel, "{ }");
+
+		setToggleButton = new JToggleButton("Set", false);
+		setToggleButton.addActionListener(this);
+		buttonPanel.add(setToggleButton);
+		addButton(buttonPanel, ",");
+		addButton(buttonPanel, "{ ");
+		addButton(buttonPanel, " }");
 		addButton(buttonPanel, "∩");
 		addButton(buttonPanel, "∪");
 
@@ -114,7 +125,33 @@ public class HexUserInterface implements ActionListener {
 		hexComponents[3] = allComponents[27];
 		hexComponents[4] = allComponents[28];
 		hexComponents[5] = allComponents[29];
-		hexComponents[6] = allComponents[31];
+		hexComponents[6] = allComponents[20];
+
+		notSetComponents = new Component[10];
+
+		notSetComponents[0] = allComponents[3];
+		notSetComponents[1] = allComponents[5];
+		notSetComponents[2] = allComponents[9];
+		notSetComponents[3] = allComponents[11];
+		notSetComponents[4] = allComponents[16];
+		notSetComponents[5] = allComponents[18];
+		notSetComponents[6] = allComponents[20];
+		notSetComponents[7] = allComponents[4];
+		notSetComponents[8] = allComponents[15];
+		notSetComponents[9] = allComponents[21];
+
+		numbers = new Component[10];
+
+		numbers[0] = allComponents[0];
+		numbers[1] = allComponents[1];
+		numbers[2] = allComponents[2];
+		numbers[3] = allComponents[6];
+		numbers[4] = allComponents[7];
+		numbers[5] = allComponents[8];
+		numbers[6] = allComponents[12];
+		numbers[7] = allComponents[13];
+		numbers[8] = allComponents[14];
+		numbers[9] = allComponents[19];
 
 		operators = new Component[4];
 
@@ -123,10 +160,24 @@ public class HexUserInterface implements ActionListener {
 		operators[2] = allComponents[16];
 		operators[3] = allComponents[22];
 
+		setOperators = new Component[5];
+
+		setOperators[0] = allComponents[32];
+		setOperators[1] = allComponents[33];
+		setOperators[2] = allComponents[34];
+		setOperators[3] = allComponents[35];
+		setOperators[4] = allComponents[31];
+
 		for (Component tempComp : hexComponents) {
 			tempComp.setEnabled(false);
 		}
+
+		for (Component tempComp : setOperators) {
+			tempComp.setEnabled(false);
+		}
+
 		hexComponents[6].setEnabled(true);
+
 		for (Component tempOperator : operators) {
 			tempOperator.setEnabled(false);
 		}
@@ -153,25 +204,30 @@ public class HexUserInterface implements ActionListener {
 
 		switch (command) {
 		case "=":
-			try {
-			// Error Handling.
-			String displayTemp = displayValue;
-			displayTemp = displayTemp.replace("( ", "");
-			displayTemp = displayTemp.replace(" )", "");
-			if ((displayTemp.length() % 2) == 0 || displayTemp.length() == 1 || displayTemp.equals("")) {
-				break;
-			}
+			if (isSetMode) {
+				displayValue = setOperations(displayValue, setOperation);
+			} else {
 
-			if (!isHex)
+				try {
+					// Error Handling.
+					String displayTemp = displayValue;
+					displayTemp = displayTemp.replace("( ", "");
+					displayTemp = displayTemp.replace(" )", "");
+					if ((displayTemp.length() % 2) == 0 || displayTemp.length() == 1 || displayTemp.equals("")) {
+						break;
+					}
 
-				displayValue = calc.getDecSolution(displayValue);
+					if (!isHex)
 
-			if (isHex)
-				displayValue = calc.getHexSolution(displayValue);
-			break;
-			} catch (RuntimeException e) {
-				displayValue = "0";
-				break;
+						displayValue = calc.getDecSolution(displayValue);
+
+					if (isHex)
+						displayValue = calc.getHexSolution(displayValue);
+					break;
+				} catch (RuntimeException e) {
+					displayValue = "0";
+					break;
+				}
 			}
 		case "?":
 			showInfo();
@@ -184,6 +240,7 @@ public class HexUserInterface implements ActionListener {
 			break;
 
 		case "CE":
+			isSetMode = false;
 			if (displayValue.equals("")) {
 				break;
 			}
@@ -223,6 +280,7 @@ public class HexUserInterface implements ActionListener {
 			displayValue += " " + command + " ";
 			operatorPressed = true;
 			checkOperators();
+			setOperation = command;
 			break;
 
 		case "*":
@@ -265,6 +323,25 @@ public class HexUserInterface implements ActionListener {
 			checkOperators();
 			break;
 
+		case ",":
+			displayValue += command + " ";
+			break;
+
+		case "∩":
+			displayValue += " " + command + " ";
+			setOperation = command;
+			break;
+
+		case "∪":
+			displayValue += " " + command + " ";
+			setOperation = command;
+			break;
+
+		case "Set":
+
+			switchSetMode();
+			break;
+
 		default:
 
 			displayValue += command;
@@ -289,7 +366,7 @@ public class HexUserInterface implements ActionListener {
 
 	}
 
-	protected void switchHex() {
+	private void switchHex() {
 
 		if (isHex) {
 			toggleButton.setText("Hex");
@@ -312,6 +389,71 @@ public class HexUserInterface implements ActionListener {
 
 			isHex = true;
 		}
+	}
+
+	private void switchSetMode() {
+
+		if (!isSetMode) {
+
+			displayValue = "";
+
+			for (Component tempComp : setOperators) {
+				tempComp.setEnabled(true);
+			}
+
+			for (Component temp : operators) {
+				temp.setEnabled(false);
+			}
+
+			for (Component temp : notSetComponents) {
+				temp.setEnabled(false);
+			}
+
+			isSetMode = true;
+		} else {
+			displayValue = "";
+
+			for (Component tempComp : setOperators) {
+				tempComp.setEnabled(false);
+			}
+
+			for (Component temp : operators) {
+				temp.setEnabled(true);
+			}
+
+			for (Component temp : notSetComponents) {
+				temp.setEnabled(true);
+			}
+
+			for (Component temp : numbers) {
+				temp.setEnabled(true);
+			}
+
+			isSetMode = false;
+		}
+
+	}
+
+	public String setOperations(String displayString, String setOperator) {
+
+		String newDisplayValue = "";
+		switch (setOperator) {
+		case "∩":
+			newDisplayValue = calc.intersectionSets(displayString);
+			break;
+		case "∪":
+			newDisplayValue = calc.unionSets(displayString);
+			break;
+		case "-":
+			newDisplayValue = calc.subtractSets(displayString);
+			break;
+
+		default:
+			newDisplayValue = "Calculation error! You suck!";
+			break;
+		}
+
+		return newDisplayValue;
 	}
 
 	public void setVisible(boolean visible) {
