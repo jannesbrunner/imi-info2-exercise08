@@ -50,9 +50,10 @@ public class CalcEngine {
 		s = s.replace("{", "");
 		s = s.replace("}", "");
 		s = s.replace(" ", "");
-		s = s.replace(",","");
+		String resultarray[] = s.split(",");
+		
 		 
-		 amount = s.length();
+		 amount = resultarray.length;
 		 System.out.println(s);
 		
 		 
