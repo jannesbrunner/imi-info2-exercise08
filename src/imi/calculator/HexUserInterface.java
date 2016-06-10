@@ -30,7 +30,6 @@ public class HexUserInterface implements ActionListener {
 	private String displayValue;
 
 	private boolean operatorPressed;
-	private boolean digitPressed;
 
 	/**
 	 * Create a user interface.
@@ -60,7 +59,7 @@ public class HexUserInterface implements ActionListener {
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
 
-		JPanel buttonPanel = new JPanel(new GridLayout(5, 5));
+		JPanel buttonPanel = new JPanel(new GridLayout(6, 5));
 
 		addButton(buttonPanel, "7");
 		addButton(buttonPanel, "8");
@@ -89,7 +88,7 @@ public class HexUserInterface implements ActionListener {
 		buttonPanel.add(new JLabel(" "));
 		addButton(buttonPanel, "0");
 
-		addButton(buttonPanel, "+/-");
+		buttonPanel.add(new JLabel(" "));
 		addButton(buttonPanel, "^");
 
 		addButton(buttonPanel, "-");
@@ -101,6 +100,12 @@ public class HexUserInterface implements ActionListener {
 		addButton(buttonPanel, "D");
 		addButton(buttonPanel, "E");
 		addButton(buttonPanel, "F");
+		
+		buttonPanel.add(new JLabel(" "));
+		addButton(buttonPanel, "+/-");
+		addButton(buttonPanel, "{ }");
+		addButton(buttonPanel, "∩");
+		addButton(buttonPanel, "∪");
 
 		Component[] allComponents = buttonPanel.getComponents();
 		hexComponents[0] = allComponents[24];
@@ -109,7 +114,7 @@ public class HexUserInterface implements ActionListener {
 		hexComponents[3] = allComponents[27];
 		hexComponents[4] = allComponents[28];
 		hexComponents[5] = allComponents[29];
-		hexComponents[6] = allComponents[20];
+		hexComponents[6] = allComponents[31];
 
 		operators = new Component[4];
 
