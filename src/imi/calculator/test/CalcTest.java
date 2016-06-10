@@ -218,7 +218,7 @@ public class CalcTest {
 		
 		String setsToSubstract = "{ 5, 3, 7 } ∩ { 5, 3, 8, 9, }";
 		String result = engine.intersectionSets(setsToSubstract);
-		System.out.println(result);
+		
 		assertEquals("{ 5, 3, 7 } ∩ { 5, 3, 8, 9, } = { 3, 5 }", "{ 3, 5 }", result);
 			
 		

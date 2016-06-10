@@ -86,17 +86,15 @@ public class CalcEngine {
 		}
 
 		for (String value : rhs) {
-			System.out.println("Davor:" +result);
-			System.out.println("Gesucht:" +value);
-			System.out.println("Ist da?: " +result.contains(Integer.parseInt(value)));
+			
 			
 			if (result.contains(Integer.parseInt(value))) {
 				result.remove(Integer.parseInt(value));
 
 			}
-			System.out.println("Danach: "+result);
+			
 		}
-		System.out.println(result);
+		
 		this.lastSetResult = result;
 		return result.toString();
 
