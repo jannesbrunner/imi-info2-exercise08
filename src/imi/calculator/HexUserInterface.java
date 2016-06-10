@@ -204,11 +204,12 @@ public class HexUserInterface implements ActionListener {
 
 		switch (command) {
 		case "=":
-			if (isSetMode) {
-				displayValue = setOperations(displayValue, setOperation);
-			} else {
 
-				try {
+			try {
+				if (isSetMode) {
+					displayValue = setOperations(displayValue, setOperation);
+				} else {
+
 					// Error Handling.
 					String displayTemp = displayValue;
 					displayTemp = displayTemp.replace("( ", "");
@@ -224,10 +225,12 @@ public class HexUserInterface implements ActionListener {
 					if (isHex)
 						displayValue = calc.getHexSolution(displayValue);
 					break;
-				} catch (RuntimeException e) {
-					displayValue = "0";
-					break;
 				}
+			} catch (Exception e) {
+				displayValue = "ERROR - " + e;
+				//e.printStackTrace();
+				break;
+
 			}
 		case "?":
 			showInfo();
@@ -449,7 +452,7 @@ public class HexUserInterface implements ActionListener {
 			break;
 
 		default:
-			newDisplayValue = "Calculation error! You suck!";
+			newDisplayValue = "Calculation error! Wrong operator! You suck!";
 			break;
 		}
 
