@@ -2,6 +2,7 @@ package imi.calculator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class Set {
 
@@ -34,15 +35,15 @@ public class Set {
 	
 	public void remove(int toRemove){
 		if(contains(toRemove)){
-			int index = 0; 
-			for (int i = 0; i < listOfIntegers.size(); i++)
-				if(listOfIntegers.indexOf(i) == toRemove){
-					index = listOfIntegers.get(i);
-					System.out.println("HEJ!");
+			for (Iterator iterator = listOfIntegers.iterator(); iterator.hasNext();) {
+				Integer integer = (Integer) iterator.next();
+				if(integer == toRemove){
+					iterator.remove();
 				}
-			listOfIntegers.remove(index);
-			
+
+			}
 		}
+
 	}
 	
 	public boolean isEmpty(){
@@ -72,8 +73,8 @@ public class Set {
 		mySet.add(7432); 
 		System.out.println("After the add of 7432 " + mySet.toString());
 		System.out.println("Print again " + mySet.toString());
-		mySet.remove(12);
-		System.out.println("After remove of 12 " + mySet.toString());
+		mySet.remove(1233);
+		System.out.println("After remove of 1233 " + mySet.toString());
 		mySet.remove(16);
 		System.out.println("After remove of 16 " + mySet.toString());
 		mySet.clear();
