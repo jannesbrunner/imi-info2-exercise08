@@ -189,5 +189,40 @@ public class CalcTest {
 		stack.pop();
 	}
 	
+	
+	// Set Calculation Tests
+	
+	@Test
+	public void UnionTwoSets() {
+		
+		String setsToUnion = "{ 5, 3, 7 } + { 5, 3, 8, 9, }";
+		String result = engine.unionSets(setsToUnion);
+		assertEquals("{ 5, 3, 7 } + { 5, 3, 8, 9, } = { 3, 5, 7, 8, 9 }", "[3, 5, 7, 8, 9]", result);
+			
+		
+	}
+	
+	@Test
+	public void SubstractTwoSets() {
+		
+		String setsToSubstract = "{ 5, 3, 7 } - { 5, 3, 8, 9, }";
+		String result = engine.subtractSets(setsToSubstract);
+		System.out.println(result);
+		assertEquals("{ 5, 3, 7 } - { 5, 3, 8, 9, } = { 7 }", "[7]", result);
+			
+		
+	}
+	
+	@Test
+	public void IntersectionTwoSets() {
+		
+		String setsToSubstract = "{ 5, 3, 7 } ∩ { 5, 3, 8, 9, }";
+		String result = engine.intersectionSets(setsToSubstract);
+		System.out.println(result);
+		assertEquals("{ 5, 3, 7 } ∩ { 5, 3, 8, 9, } = { 3, 5 }", "[3, 5]", result);
+			
+		
+	}
+	
 
 }
